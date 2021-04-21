@@ -1,12 +1,16 @@
 <template>
   <v-app>
-    <v-main>
-      <router-view></router-view>
+    <Navbar></Navbar>
+    <v-main class="grey lighten-4">
+      <v-container>
+        <router-view></router-view>
+      </v-container>
     </v-main>
   </v-app>
 </template>
 
 <script>
+import Navbar from './components/global/Navbar.vue';
 import HelloWorld from './components/HelloWorld';
 
 export default {
@@ -14,6 +18,7 @@ export default {
 
   components: {
     HelloWorld,
+    Navbar
   },
 
   data: () => ({
