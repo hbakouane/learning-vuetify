@@ -20,9 +20,5 @@ export default {
     HelloWorld,
     Navbar
   },
-
-  data: () => ({
-    //
-  }),
 };
 </script>

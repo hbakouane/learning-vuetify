@@ -14,27 +14,31 @@
             </v-btn>
         </v-toolbar>
     </nav>
-    <v-navigation-drawer temporary app v-model="drawer" color="grey lighten-4">
-      <v-layout row wrap justify-center class="mb-1">
-        <v-flex md6>
-          <v-img
-            lazy-src="https://picsum.photos/id/11/10/6" 
-            src="https://picsum.photos/id/11/500/300"
-            class="rounded-circle my-5"
-            height="150"
-          >
-          </v-img>
+    <v-navigation-drawer hide-overlay temporary app v-model="drawer" color="grey lighten-4">
+      <v-layout column wrap align-center class="mb-1 mt-15">
+        <v-flex md12 class="mb-4">
+          <v-avatar size="150">
+            <img src="https://picsum.photos/id/11/500/300" class="grey lighten-3">
+          </v-avatar>
+          <v-badge 
+            left
+            bordered
+            color="success"
+            overlap
+          ></v-badge>
+        </v-flex>
+        <v-flex md12>
           <router-link 
             to="/profile" 
-            class="subtitle-1 blue-grey--text darken-4 text-center text-decoration-none"
+            class="blue-grey--text darken-4 text-decoration-none"
             >
             Haytam Bakouane
-            </router-link>
+          </router-link>
         </v-flex>
       </v-layout>
       <v-list>
         <v-list-item-group>
-          <v-list-item active-class="blue-grey darken-3" class=" grey--text" v-for="(link, i) in links" :key="i" router :to="link.route" exact>
+          <v-list-item active-class="grey darken-3" class="grey--text" v-for="(link, i) in links" :key="i" router :to="link.route" exact>
             <v-list-item-icon>
               <v-icon class="grey--text">{{ link.icon }}</v-icon>
             </v-list-item-icon>
@@ -44,6 +48,12 @@
           </v-list-item>
         </v-list-item-group>
       </v-list>
+      <template v-slot:append>
+        <v-btn large block color="grey darken-3" class="rounded-0 white--text" @click="logout">
+            Sign Out
+            <v-icon>mdi-exit-to-app</v-icon>
+        </v-btn>
+      </template>
     </v-navigation-drawer>
   </div>
 </template>
