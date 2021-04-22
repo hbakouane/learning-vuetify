@@ -34,7 +34,7 @@
       </v-flex>
       <v-flex xs11 md10 xl8>
         <v-card>
-          <draggable v-model="projects" group="projects" @start="drag=true" @end="drag=true">
+          <draggable v-model="newProjects" group="newProjects">
             <transition-group>
               <v-card-text
                 :class="[{
@@ -117,11 +117,18 @@ export default {
     }
   },
   beforeMount: async function() {
+    if (!localStorage.projects || localStorage.projects.length == 0) {
+      let projects = []
       await fetch('http://localhost:3000/projects')
       .then(res => res.json())
-      .then(data => this.$store.state.projects = data)
+      .then(data => projects = data)
       .catch(err => console.log(err))
-      this.projects = this.$store.state.projects
+      localStorage.setItem('projects', JSON.stringify(projects))
+      console.log('before mount on if') 
+    }
+    console.log('before mount')
+    this.projects = JSON.parse(localStorage.getItem('projects'))
+    this.newProjects = JSON.parse(localStorage.getItem('projects'))
   },
   methods: {
     sortTodos: function () {
@@ -152,7 +159,22 @@ export default {
       }
     },
     projects: function () {
-      return this.results = this.projects.length
+      return this.results = 1111111111
+    },
+    newProjects: function () {
+      return this.newProjects
+    }
+  },
+  computed: {
+    newProjects: {
+      get() {
+        return JSON.parse(localStorage.getItem('projects'))
+      },
+      set(value) {
+        console.log('setter')
+        localStorage.setItem('projects', JSON.stringify(value))
+        return this.projects = JSON.parse(localStorage.getItem('projects'))
+      }
     }
   }
 }
